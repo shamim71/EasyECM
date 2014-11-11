@@ -1,0 +1,96 @@
+
+	<div id="userContentPane3x" dojoType="dijit.layout.ContentPane" tabindex="0"  style="border: 0px solid red;" 
+	region="center" aria-live="assertive" aria-atomic="true" >
+	
+			<div dojoType="dojo.data.ItemFileReadStore" jsId="userDataStore"  url="http://localhost:8080/easy-ecm-web/users2.json" urlPreventCache="true"></div>
+
+		
+		<div dojoType="dijit.Toolbar">
+			<table border="0" width="100%" cellpadding="0" cellspacing="0">
+			  <tr>
+			     <td align="left"><div class=leading>
+			     	<div style="float: left;">
+						User Management
+					</div>
+			     	</div>
+			     </td>
+
+			     <td width="50%" align="right"><div  class="sub_toolbar_right_component">
+			     			<div id="user.add"  data-dojo-type="dijit.form.Button" data-dojo-props="iconClass:'dijitEditorIcon dijitEditorIconNewPage', showLabel:true">New</div>
+			     			<span dojoType="dijit.Tooltip" connectId="user.add">Click to add a new user.</span>
+			     			<div id="user.edit" data-dojo-type="dijit.form.Button" data-dojo-props="iconClass:'dijitIconEdit', showLabel:true">Edit</div>	
+			     			<div id="user.delete" data-dojo-type="dijit.form.Button" data-dojo-props="iconClass:'dijitEditorIcon dijitEditorIconDelete', showLabel:true">Delete</div>	
+			     </div></td>
+			  </tr>
+			</table>
+		</div>
+		
+	<!-- User Data Grid -->	
+		<div id="userContentPane4x" dojoType="dijit.layout.ContentPane" tabindex="0"  style="border: 0px solid red; height: 535px;">
+
+		</div>
+
+
+	<!-- User Dialog -->
+	
+		<div class="dijitHidden">
+			<!-- Start of User Add dialog -->
+			<div data-dojo-type="dijit.Dialog" data-dojo-props="title:'New User'" id="userDialog">
+				<div data-dojo-type="dijit.form.Form" id="user.dialog.form" data-dojo-id="userform"	encType="multipart/form-data" action="" method="">	
+					<div class="dijitDialogPaneContentArea">
+						<div id="ABintro11" style="width:25em;">
+						  <table>	
+							<tr>
+								<td style="text-align:right;"><label for="user.dialog.name">Login name:</label></td>
+								<td><input id="user.dialog.name"  dojoType="dijit.form.ValidationTextBox" type="text"
+									trim="true"
+									required="true"
+									invalidMessage="Invalid Login Name"
+								 >
+								</td>
+							</tr>
+					
+							<tr>
+								<td style="text-align:right;"><label for="user.dialog.display.name">Display name:</label></td>
+								<td><input id="user.dialog.display.name" dojoType="dijit.form.TextBox" type="text"></td>
+							</tr>
+							<tr>
+								<td style="text-align:right;"><label for="user.dialog.email">Email address:</label></td>
+								<td><input id="user.dialog.email" data-dojo-type="dijit.form.ValidationTextBox" type="text"
+								 data-dojo-props="regExp:'[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}', required:true, invalidMessage:'Invalid email address.'"></td>
+							</tr>
+					
+							<tr>
+								<td style="text-align:right;"><label for="user.dialog.password">Password:</label></td>
+								<td><input id="user.dialog.password" type="password"
+									dojoType="dijit.form.ValidationTextBox"
+									trim="true"
+									required="true"
+									>
+								</td>
+							</tr>
+					
+							<tr>
+								<td style="text-align:right;"><label for="user.dialog.confirm.password">Confirm password:</label></td>
+								<td><input id="user.dialog.confirm.password" type="password"
+									dojoType="dijit.form.ValidationTextBox"
+									trim="true"
+									required="true"
+								></td>
+							</tr>
+						</table>
+						</div>
+					</div>
+					
+					<div class="dijitDialogPaneActionBar">
+						<button id="user.dialog.save" data-dojo-type="dijit.form.Button">Save</button>
+						<button id="user.dialog.update" data-dojo-type="dijit.form.Button">Update</button>
+						<button id="user.dialog.cancel" data-dojo-type="dijit.form.Button"  data-dojo-props='type:"button", onClick:function(){ dijit.byId("userDialog").onCancel(); }'>Cancel</button>
+					</div>					
+				</div>
+			</div>
+			<!-- End of User Add dialog -->
+		
+		</div>
+		
+	</div>

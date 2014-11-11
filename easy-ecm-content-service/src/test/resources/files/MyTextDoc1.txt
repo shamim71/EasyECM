@@ -1,0 +1,12 @@
+I am primary version of a document=== changes 1.0
+Note: all parameters (except path) have default values and can be omitted to use the default. 
+
+Proprietary Features
+
+Jackrabbit supports some advanced features, which are not specified in JSR 170: 
+
+Extract text from binary content: TextExtractor; TextExtractorExamples 
+
+Get a text excerpt with highlighted words that matched the query: ExcerptProvider 
+
+Search for a term and its synonyms: SynonymSearch 

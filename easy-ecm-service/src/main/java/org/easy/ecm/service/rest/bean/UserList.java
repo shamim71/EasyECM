@@ -6,14 +6,14 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
-@XmlRootElement(name="users")
+@XmlRootElement(name="items")
 public class UserList {
 
-	private List<User> users;
+	private List<User> items;
 
 	public UserList(List<User> users) {
 		super();
-		this.users = users;
+		this.items = users;
 	}
 
 	public UserList() {
@@ -21,12 +21,12 @@ public class UserList {
 	}
 
 	@XmlElement(name="user")
-	public List<User> getUsers() {
-		return users;
+	public List<User> getItems() {
+		return items;
 	}
 
-	public void setUsers(List<User> users) {
-		this.users = users;
+	public void setItems(List<User> users) {
+		this.items = users;
 	}
 	
 }

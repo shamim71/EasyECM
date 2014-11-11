@@ -1,0 +1,95 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.easy.ecm</groupId>
+		<artifactId>easy-ecm</artifactId>
+		<version>0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>easy-ecm-content-service</artifactId>
+	<packaging>jar</packaging>
+	<name>ECM Repository Service</name>
+	<version>1.9</version>
+	<properties>
+		<wicket.version>1.4.1</wicket.version>
+		<inmethod.grid.version>1.0.0-b4</inmethod.grid.version>
+		<htmllexer.version>2.0-beta1</htmllexer.version>
+		<jackrabbit.version>2.2.8</jackrabbit.version>
+		<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
+		<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
+		<jdbc.driver.version>5.1.13</jdbc.driver.version> 
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.easy.ecm</groupId>
+			<artifactId>easy-ecm-common</artifactId>
+			<version>0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.jcr</groupId>
+			<artifactId>jcr</artifactId>
+			<version>2.0</version>
+		</dependency>
+
+		<!-- JACKRABBIT -->
+		<dependency>
+			<groupId>org.apache.jackrabbit</groupId>
+			<artifactId>jackrabbit-api</artifactId>
+			<version>${jackrabbit.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.jackrabbit</groupId>
+			<artifactId>jackrabbit-core</artifactId>
+			<version>${jackrabbit.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.jackrabbit</groupId>
+			<artifactId>jackrabbit-jcr-commons</artifactId>
+			<version>${jackrabbit.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.jackrabbit</groupId>
+			<artifactId>jackrabbit-jcr-server</artifactId>
+			<version>${jackrabbit.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.jackrabbit</groupId>
+			<artifactId>jackrabbit-jcr-rmi</artifactId>
+			<version>${jackrabbit.version}</version>
+		</dependency>
+		<!-- jdbc driver -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.6</version>
+		</dependency>
+		<!-- database end -->
+
+		<!-- Use Logback for logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>0.9.28</version>
+			<scope>runtime</scope>
+		</dependency>
+
+
+
+	</dependencies>
+
+</project>

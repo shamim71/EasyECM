@@ -1,0 +1,122 @@
+package org.easy.ecm.content.service;
+
+import javax.jcr.Session;
+import javax.jcr.security.Privilege;
+
+import org.easy.ecm.common.exception.EcmException;
+import org.easy.ecm.content.service.repository.ManagedSessionFactory;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations= { "/spring-jackrabbit-context.xml" })
+public class SecurityServiceTest extends AbstractRepositoryServiceIntegrationTest{
+	protected final Logger log = LoggerFactory.getLogger(RepositoryServiceTest.class);
+	
+    @Autowired
+    private  ManagedSessionFactory sessionFactory = null;
+    
+    @Autowired
+    private ISecurityService securityService; 
+    
+    protected  static Session session = null;
+    
+   
+    
+    @Test
+    public void sessionIsOpen() {
+    	log.debug("....................Validating session is open.........................");
+    	try {
+			session = this.sessionFactory.createSession("default");
+		} catch (EcmException e) {
+			e.printStackTrace();
+		}
+    	Assert.assertTrue(session.isLive());
+    	log.debug("....................Validating session is done.........................");
+    }
+    
+    @Test
+    public void checkAccessControll() {
+    	try {
+        	this.securityService.setSession(session);
+        	boolean hasAccess = this.securityService.hasAccessControll(TestRepConstants.FOLDER_MY_DOCUMENT, TestSecConstants.TEST_U2, Privilege.JCR_WRITE);
+        	if(hasAccess){
+        		Assert.assertTrue(hasAccess);
+        	}
+        	else{
+                Assert.fail("User has no access to the folder, "+ TestRepConstants.FOLDER_MY_DOCUMENT);
+        	}
+        	
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.assertTrue(false);
+		}
+    }
+    @Test
+    public void setAccessControll() {
+    	try {
+        	this.securityService.setSession(session);
+        	this.securityService.setAccessControll(TestRepConstants.FOLDER_MY_DOCUMENT, TestSecConstants.TEST_U2, Privilege.JCR_WRITE);
+        	Assert.assertTrue(true);
+        	
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+			 Assert.fail("User has no access to the folder, "+ TestRepConstants.FOLDER_MY_DOCUMENT);
+		}
+    }
+    
+    @Test
+    public void checkAccessControllAgain() {
+    	try {
+        	this.securityService.setSession(session);
+        	boolean hasAccess = this.securityService.hasAccessControll(TestRepConstants.FOLDER_MY_DOCUMENT, TestSecConstants.TEST_U2, Privilege.JCR_WRITE);
+        	if(hasAccess){
+        		Assert.assertTrue(hasAccess);
+        	}
+        	else{
+                Assert.fail("User has no access to the folder, "+ TestRepConstants.FOLDER_MY_DOCUMENT);
+        	}
+        	
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.assertTrue(false);
+		}
+    }
+    
+    @Test
+    public void denyAccessControllAgain() {
+    	try {
+        	this.securityService.setSession(session);
+        	this.securityService.denyAccessControll(TestRepConstants.FOLDER_MY_DOCUMENT, TestSecConstants.TEST_G1, Privilege.JCR_REMOVE_CHILD_NODES);
+        	this.securityService.setAccessControll(TestRepConstants.FOLDER_MY_DOCUMENT, TestSecConstants.TEST_G1, Privilege.JCR_MODIFY_PROPERTIES);
+        	
+        	Assert.assertTrue(false);
+      
+        	
+		} catch (Exception e) {
+			e.printStackTrace();
+			  Assert.fail("User has no access to the folder, "+ TestRepConstants.FOLDER_MY_DOCUMENT);
+		}
+    }
+    
+    @Test
+    public void sessionIsClosed() {
+    	log.debug("....................Validating session is closed........................");
+    	Assert.assertTrue(session.isLive());
+    	log.debug("....................Validating session closed done......................");
+    }
+    
+    @Test
+    public void destroyAllActiveSession() {
+    	log.debug("Destroying all live session");
+    	this.sessionFactory.cleanup();
+    	Assert.assertTrue(true);
+    }
+}

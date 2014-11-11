@@ -1,42 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	id="WebApp_ID" version="2.5">
-	
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+
 	<display-name>ECM Core Service</display-name>
-	
+
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
-	
-	<!-- The context params that read by ContextLoaderListener  -->
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/easy-ecm-application-context.xml</param-value>
-	</context-param>
-	
-	<!-- This listener will load other application context file in addition to springweb-servlet.xml -->
+
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/spring/easy-ecm-application-context.xml
+		</param-value>
+	</context-param>
+
 	<servlet>
 		<servlet-name>rest2</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring/easy-ecm-application-context.xml</param-value>
+			<param-value>/WEB-INF/spring/spring-web-default.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
-		
+		<async-supported>true</async-supported>
 	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>rest2</servlet-name>
 		<url-pattern>/service/*</url-pattern>
 	</servlet-mapping>
-	
+
+	<filter>
+		<description>
+		</description>
+		<display-name>SimpleCORSFilter</display-name>
+		<filter-name>SimpleCORSFilter</filter-name>
+		<filter-class>com.easy.ecm.service.filter.SimpleCORSFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>SimpleCORSFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<listener>
+		<listener-class>com.easy.ecm.service.listener.JcrSessionContextListener</listener-class>
+	</listener>
+
+
 	<jsp-config>
 		<taglib>
 			<taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>

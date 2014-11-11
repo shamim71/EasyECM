@@ -6,6 +6,6 @@
 		http://www.springframework.org/schema/context 
 		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<bean id="employeeDS" class="org.easy.ecm.service.rest.ds.EmployeeDS" />
 
+	<import resource="easy-ecm-rest-servlet.xml" />
 </beans>

@@ -1,10 +1,12 @@
 package org.easy.ecm.service.rest.bean;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 
 @XmlRootElement(name="employee")
-public class Employee {
+public class Employee implements Serializable {
 
 	private long id;
 	private String name;

@@ -1,0 +1,90 @@
+
+#usersDataGrid { 
+	border: none;
+	width: 100%;
+	height: 54.5em;
+}
+#usersDataGrid .dojoxGridRow {
+	border: none;
+}
+
+#usersDataGrid .dojoxGridRowTable {
+	border-collapse: collapse;
+}
+
+#usersDataGrid .dojoxGridCell {
+	border: none;
+	padding: 3px;
+}
+
+#usersDataGrid .dojoxGridscrollbox  {
+	overflow-x: none;
+}
+
+/*
+#usersDataGrid .dojoxGridHeader { 
+	display:none; 
+}
+*/
+.oddRow .dojoxGridCell {
+	background-color: #F9FAFC;
+	color: black;
+}
+
+.overRow .dojoxGridCell {
+	background-color: #F2F6F9;
+	color: black;
+}
+
+.selectedRow .dojoxGridCell {
+	background-color: #F2F6F9;
+	color: black;
+}
+
+#usersDataGrid .dojoxGridHeader  .dojoxGridCell {
+	background-image: none;
+	background-color: #F2F6F9;
+	color: black;
+	height: 0px;
+}
+
+
+.center { 
+	width: 300px; 
+	}
+	
+.leading, .trailing { 
+	width: 200px; 
+	}
+.leading, .trailing { 
+	width: 200px; 
+	}
+	
+.plusIcon, .plusBlockIcon {
+	background-image: url(../images/plus.gif);
+	background-repeat: no-repeat;
+	background-position: center center;
+	width: 18px;
+	height: 18px;
+}
+
+.sub_toolbar_right_component{
+	margin-right: 20px;
+}
+
+.dijitDialogPaneContentArea {
+  border: 0px solid red;
+  margin: -10px -8px;
+  padding: 10px 8px;
+}
+.dijitDialogPaneActionBar {
+  
+  background-color: #efefef;
+  padding: 3px 5px 2px 7px;
+  text-align: right;
+  border-top: 1px solid #d3d3d3;
+  margin: 10px -12px -10px;
+}
+.dijitDialogPaneActionBar .dijitButton {
+  float: none;
+}

@@ -1,0 +1,29 @@
+(window["http://localhost:8080/easy-ecm-web/js/easy/ecm/sec/securityservices.smd"] || function(val) {return val}) (
+{
+	transport: "REST",
+	envelope: "URL",
+	strictParameters: false,
+	parameters: {
+                appId: {},
+                outputType: {
+                        "default": "json"
+                },
+
+                ignoreErrors: {
+                        optional: true
+                }
+        },
+
+        services: {
+
+			loadUsers: {
+					transport: "REST",
+					contentType:"application/json",
+	                target: "http://localhost:8080/easy-ecm-service/service/users",
+					headers: { "Accept": "application/json" },
+					"parameters": []
+	    	}   
+	    }
+
+	
+})

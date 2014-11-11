@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   					   http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- Register Annotation-based Post Processing Beans -->
+	<context:annotation-config />
+	<context:component-scan base-package="org.easy.ecm.content.service" />
+
+
+	
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="repositroyConfig.properties" />
+	</bean>
+
+
+	<bean id="defaultCredentialBean"
+		class="org.easy.ecm.content.service.security.DefaultCredentialBean">
+		<constructor-arg index="0" value="${easy.ecm.jcr.admin.login}" />
+		<constructor-arg index="1"
+			value="${easy.ecm.jcr.admin.password}" />
+	</bean>
+
+	<bean id="repository" class="org.apache.jackrabbit.core.RepositoryImpl">
+		<constructor-arg index="0" ref="config" />
+	</bean>
+
+	<!-- <bean id="repositoryProvider" class="org.easy.ecm.content.service.repository.RepositoryProvider"> 
+		</bean> -->
+
+	<bean id="config" class="org.apache.jackrabbit.core.config.RepositoryConfig"
+		factory-method="create">
+		<constructor-arg index="0"
+			value="${easy.ecm.repository.config.file}" />
+		<constructor-arg index="1"
+			value="${easy.ecm.repository.config.home}" />
+	</bean>
+
+</beans>

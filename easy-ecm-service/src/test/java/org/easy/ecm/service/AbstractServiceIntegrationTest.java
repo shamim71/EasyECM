@@ -11,9 +11,10 @@ import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
 public class AbstractServiceIntegrationTest extends Assert {
-	
-	protected static String[] getConfigLocations() {return new String[] { "easy-ecm-application-context.xml" };
+		
+	protected static String[] getConfigLocations() {return new String[] { "easy-ecm-rest-client.xml" };
 	}
+	
 	public static ClassPathXmlApplicationContext context= null;
 	
 	protected static RestTemplate template;
@@ -23,7 +24,7 @@ public class AbstractServiceIntegrationTest extends Assert {
     	context = new ClassPathXmlApplicationContext(getConfigLocations());
 		template = (RestTemplate) context.getBean("restTemplate");
 	}
-    
+        
     @AfterClass
 	public static void tearDown() {
     	
@@ -34,4 +35,5 @@ public class AbstractServiceIntegrationTest extends Assert {
 		HttpEntity<String> entity = new HttpEntity<String>(headers);
 		return entity;
 	}
+		
 }

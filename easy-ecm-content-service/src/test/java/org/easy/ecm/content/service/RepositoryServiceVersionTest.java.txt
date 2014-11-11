@@ -1,0 +1,316 @@
+package org.easy.ecm.content.service;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.jcr.Node;
+import javax.jcr.Session;
+
+import org.easy.ecm.common.exception.EcmException;
+import org.easy.ecm.content.service.repository.ManagedSessionFactory;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+/**
+ * A JUnit Test class for SimpleDocumentServiceImpl class which implements
+ * IDocumentService interface consisting of repository document service
+ * operations.
+ * 
+ * @author Shamim Ahmmed
+ * 
+ */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "/spring-jackrabbit-context.xml" })
+public class RepositoryServiceVersionTest extends AbstractRepositoryServiceIntegrationTest {
+
+	/** Logger instance */
+	private final Logger log = LoggerFactory.getLogger(RepositoryServiceVersionTest.class);
+
+	/** Thread safe JCR Session manager factory */
+	@Autowired
+	private ManagedSessionFactory sessionFactory = null;
+
+	/** Document service interface, inject via spring */
+	@Autowired
+	private IDocumentService documentService;
+
+	/** The JCR session instance, inject via spring */
+	protected static Session session = null;
+
+	/** List document versions from the repository */
+	protected static List<String> versionList = new ArrayList<String>();
+
+	/** A sample document archive location in the repository */
+	private static final String FOLDER_MY_DOCUMENT = "MyDocumentArchive";
+
+	/** A sample document to be created on the archive */
+	private static final String FILE_NAME = "MyTextDoc1.txt";
+
+	/** A sample document full file apth */
+	private final String DOC_FULL_PATH = "/" + FOLDER_MY_DOCUMENT + "/"
+			+ FILE_NAME;
+
+	/**
+	 * Test whether a valid session is created or not based on the workspace
+	 * name provided.
+	 */
+	@Test
+	public void sessionIsOpen() {
+		log.debug("Validating session is open");
+		try {
+			session = this.sessionFactory.getCurrentSession("default");
+		} catch (EcmException e) {
+			e.printStackTrace();
+			Assert.assertTrue(false);
+		}
+		Assert.assertTrue(session.isLive());
+		log.debug("Validating session is done");
+	}
+
+	/**
+	 * Create a new folder under the workspace connected
+	 */
+	@Test
+	public void createFolder() {
+		this.documentService.setSession(session);
+		try {
+			this.documentService.createFolder(FOLDER_MY_DOCUMENT);
+			Assert.assertTrue(true);
+		} catch (EcmException e) {
+			e.printStackTrace();
+			Assert.assertTrue(false);
+		}
+	}
+
+	/**
+	 * Load existing folder, it should succeed as previous test always create a
+	 * folder
+	 */
+	@Test
+	public void getFolder() {
+		this.documentService.setSession(session);
+		try {
+			Node folder = this.documentService
+					.getNode("/" + FOLDER_MY_DOCUMENT);
+			Assert.assertNotNull("Checking created folder", folder);
+
+		} catch (EcmException e) {
+			e.printStackTrace();
+			Assert.assertTrue(false);
+		}
+	}
+
+	/**
+	 * Add a document with version able enabled,
+	 */
+	@Test
+	public void addNewVersionableDocumentToFolder() {
+		this.documentService.setSession(session);
+		try {
+			EcmDocument doc = creatDocument(FILE_NAME, "utf-8", "plain/text");
+			this.documentService.addNewVersionableDocumentToFolder("/"
+					+ FOLDER_MY_DOCUMENT, doc);
+
+			Assert.assertTrue(true);
+		} catch (EcmException e) {
+			Assert.assertTrue(false);
+		} catch (IOException e) {
+			Assert.assertTrue(false);
+		}
+	}
+
+	/**
+	 * Check whether a a document is checked out or not. first time it should
+	 * not return true as the document is just created.
+	 */
+	public void isCheckOutDocument1() {
+		this.documentService.setSession(session);
+		try {
+			boolean isCheckedOut = this.documentService
+					.isNodeCheckedOut(DOC_FULL_PATH);
+
+			Assert.assertTrue(!isCheckedOut);
+		} catch (EcmException e) {
+			e.printStackTrace();
+			Assert.assertTrue(false);
+		}
+	}
+
+	/**
+	 * Now check out the document in the repository for local modification
+	 */
+	public void checkOutDocument() {
+		this.documentService.setSession(session);
+		try {
+			this.documentService.checkOutNode(DOC_FULL_PATH);
+
+			Assert.assertTrue(true);
+		} catch (EcmException e) {
+			e.printStackTrace();
+			Assert.assertTrue(false);
+		}
+	}
+
+	/**
+	 * Check whether a document is checked out or not. As in the previous test
+	 * checked out the document now it should return true.
+	 */
+	public void isCheckOutDocumentAgain() {
+		this.documentService.setSession(session);
+		try {
+			boolean isCheckedOut = this.documentService
+					.isNodeCheckedOut(DOC_FULL_PATH);
+			Assert.assertTrue(isCheckedOut);
+		} catch (EcmException e) {
+			e.printStackTrace();
+			Assert.assertTrue(false);
+		}
+	}
+
+	/**
+	 * Now check in document the previous document
+	 */
+	public void checkInDocument() {
+		this.documentService.setSession(session);
+		try {
+			this.documentService.checkInNode(DOC_FULL_PATH);
+			Assert.assertTrue(true);
+		} catch (EcmException e) {
+			e.printStackTrace();
+			Assert.assertTrue(false);
+		}
+
+	}
+
+	/**
+	 * Now we will try to create same document in the repository so that it will
+	 * create new version
+	 */
+	public void addDocumentVersionToFolder() {
+		this.documentService.setSession(session);
+		try {
+			EcmDocument doc = creatDocument(FILE_NAME, "utf-8", "plain/text");
+			this.documentService.addDocumentVersion(DOC_FULL_PATH, doc);
+
+			Assert.assertTrue(true);
+		} catch (EcmException e) {
+			e.printStackTrace();
+			Assert.assertTrue(false);
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.assertTrue(false);
+		}
+	}
+
+	/**
+	 * In the previous test we have created several version of a single document
+	 * now we will try to load these versions.
+	 */
+	public void getDocumentVersionHistory() {
+		this.documentService.setSession(session);
+		try {
+
+			List<DocumentMetadata> list = this.documentService
+					.getVersionHistory(DOC_FULL_PATH);
+			for (DocumentMetadata meta : list) {
+				System.out.println(meta.toString());
+				this.versionList.add(meta.getIdentifier());
+			}
+			Assert.assertTrue(true);
+		} catch (EcmException e) {
+			e.printStackTrace();
+			Assert.assertTrue(false);
+		}
+	}
+
+	/**
+	 * Load particular document version with the version no specified
+	 */
+	public void loadDocumentVersion() {
+		this.documentService.setSession(session);
+
+		try {
+
+			EcmDocument doc = this.documentService.loadDocumentVersion(
+					DOC_FULL_PATH, "1.6");
+
+			ByteArrayOutputStream bArrayStream = new ByteArrayOutputStream();
+			bArrayStream.write(doc.getContent());
+
+			System.out.println(bArrayStream.toString());
+			Assert.assertTrue(true);
+
+		} catch (EcmException e) {
+
+			e.printStackTrace();
+			Assert.assertTrue(false);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Assert.assertTrue(false);
+		}
+	}
+
+	/**
+	 * We would like to restore old version in the repository
+	 */
+	public void restoreDocumentVersion() {
+		this.documentService.setSession(session);
+
+		try {
+
+			this.documentService.restoreDocumentVersion(
+					"/MyDocuments/MyTextDoc1.txt", "1.3");
+
+			Assert.assertTrue(true);
+
+		} catch (EcmException e) {
+
+			e.printStackTrace();
+			Assert.assertTrue(false);
+		}
+	}
+
+	/**
+	 * Try load the specified version as it should exist in the repository
+	 */
+	public void loadDocumentVersionAgain() {
+		this.documentService.setSession(session);
+
+		try {
+
+			EcmDocument doc = this.documentService.loadDocumentVersion(
+					"/MyDocuments/MyTextDoc1.txt", "1.6");
+
+			ByteArrayOutputStream bArrayStream = new ByteArrayOutputStream();
+			bArrayStream.write(doc.getContent());
+
+			Assert.assertTrue(true);
+
+		} catch (EcmException e) {
+			e.printStackTrace();
+			Assert.assertTrue(false);
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.assertTrue(false);
+		}
+	}
+
+	/**
+	 * Destroying all live session
+	 */
+	@Test
+	public void destroyAllActiveSession() {
+		log.debug("Destroying all live session");
+		this.sessionFactory.cleanup();
+		Assert.assertTrue(true);
+	}
+}

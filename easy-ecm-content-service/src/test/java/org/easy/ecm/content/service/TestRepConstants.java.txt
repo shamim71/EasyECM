@@ -1,0 +1,6 @@
+package org.easy.ecm.content.service;
+
+public class TestRepConstants {
+
+	 public static final String FOLDER_MY_DOCUMENT = "/MyDocumentArchive/others";
+}

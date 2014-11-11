@@ -1,0 +1,66 @@
+package org.easy.ecm.content.service;
+
+
+import javax.jcr.Credentials;
+import javax.jcr.Session;
+import javax.jcr.SimpleCredentials;
+
+import org.easy.ecm.common.exception.EcmException;
+import org.easy.ecm.content.service.repository.ManagedSessionFactory;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+
+/**
+ * Tests <code></code> and traversing nodes.
+ * 
+ * @author 
+ */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations= { "/spring-jackrabbit-context.xml" })
+public class JcrNodeCreationTest {
+
+    //final Logger log = LoggerFactory.getLogger(JcrNodeCreationTest.class);
+
+    @Autowired
+    private ManagedSessionFactory sessionFactory = null;
+
+
+    @Test
+    public void reporsitoyValidate() {
+    	//log.debug("Loading...");
+    	System.out.println("Creating Repository session");
+    	try {
+    		Credentials credentials = new SimpleCredentials("shamim", "123".toCharArray());
+			Session session = sessionFactory.getCurrentSession("EasyECM");
+			
+			System.out.println("A new  Repository session has been created");
+			System.out.println(session.getUserID());
+			System.out.println("Closing repository session");
+			session.logout();
+			System.out.println("Repository repository session closed");
+			//session.getWorkspace().createWorkspace("Mamu", "default");
+		} catch (EcmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} /*catch (AccessDeniedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedRepositoryOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchWorkspaceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RepositoryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+    	Assert.assertNull(new Object());
+    }
+    
+}

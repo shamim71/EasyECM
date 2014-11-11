@@ -1,4 +1,15 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
+<body>
+	<h2>Content server is running</h2>
 
-<%-- Redirected because we can't set the welcome page to a virtual URL. --%>
-<c:redirect url="/index.html"/>
+
+
+	<form action="FileUploadServlet?workspace=ecm&path=MyDocument" enctype="multipart/form-data"
+		method="POST">
+		<input type="file" name="file"> <input type="Submit"
+			value="Upload File">
+	</form>
+
+
+</body>
+</html>

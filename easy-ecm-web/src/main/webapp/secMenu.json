@@ -1,0 +1,21 @@
+{
+        "identifier" : "itemId",
+        "label" : "label",
+        "items" : [
+			{
+			"itemId" : "root", "children" : [
+				{ "itemId" : "scUsersGroupsRoles", "messageId": "secconfig.tree.usersgroupsroles", "label": "Sec", "icon": "UsersTreeExpandoOpened", "roles": "SCASECCFG", "children": [
+					{ "itemId" : "scUserMgmt", "messageId": "secconfig.tree.userMgmt", "label": "U", "icon": "UsersTreeExpandoOpened", "roles": "SCASECCFG"},
+					{ "itemId" : "scGroupMgmt", "messageId": "secconfig.tree.groupMgmt", "label": "G", "icon": "GroupsTreeExpandoOpened", "roles": "SCASECCFG"},
+					{ "itemId" : "scRolesMgmt", "messageId": "secconfig.tree.rolesMgmt", "label": "R", "icon": "RolesTreeExpandoOpened", "roles": "SCASECCFG"}
+					]
+				},
+			
+				{ "itemId" : "scRemoteUserRegstryImport", "messageId": "secconfig.tree.remoteuserregistryconnection", "label": "Remote Registry", "icon": "RemoteUserRegistryConnectionTreeExpandoOpened", "roles": "SCALDAPSYNCCFG", "children": [
+					{ "itemId" : "scLdapConfig", "messageId": "secconfig.tree.ldapConfig", "label": "Settings", "icon": "LdapTreeExpandoOpened", "roles": "SCALDAPSYNCCFG"}
+					]
+				}
+				]
+			}
+        ]
+}

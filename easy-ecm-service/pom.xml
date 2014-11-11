@@ -1,78 +1,80 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.easy.ecm</groupId>
-    <artifactId>easy-ecm</artifactId>
-    <version>0.1-SNAPSHOT</version>
-  </parent>
-  <artifactId>easy-ecm-service</artifactId>
-  <packaging>war</packaging>
-  <name>ECM REST Web Service Interface</name>
+	<parent>
+		<groupId>org.easy.ecm</groupId>
+		<artifactId>easy-ecm</artifactId>
+		<version>0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>easy-ecm-service</artifactId>
+	<packaging>war</packaging>
+	<name>ECM REST Web Service Interface</name>
 
 	<dependencies>
-	    <dependency>
-      		<groupId>org.easy.ecm</groupId>
-      		<artifactId>easy-ecm-directory</artifactId>
-      		<version>0.1-SNAPSHOT</version>
-      		 <scope>compile</scope>
-    	</dependency>
+		<!-- <dependency> <groupId>org.easy.ecm</groupId> <artifactId>easy-ecm-directory</artifactId> 
+			<version>0.1-SNAPSHOT</version> <scope>compile</scope> </dependency> -->
 		<dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>org.springframework.web</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>org.springframework.web.servlet</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-                <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>org.springframework.oxm</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.el</groupId>
-            <artifactId>com.springsource.org.apache.el</artifactId>
-            <version>6.0.20</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>com.springsource.javax.servlet</artifactId>
-            <version>2.5.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>com.springsource.javax.servlet.jsp</artifactId>
-            <version>2.1.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>com.springsource.javax.servlet.jsp.jstl</artifactId>
-            <version>1.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.taglibs</groupId>
-            <artifactId>com.springsource.org.apache.taglibs.standard</artifactId>
-            <version>1.1.2</version>
-        </dependency>
-                
-        <dependency>
-            <groupId>org.slf4j</groupId>  
-            <artifactId>com.springsource.slf4j.api</artifactId> 
-            <version>${slf4j.version}</version>
-        </dependency>
+			<groupId>org.easy.ecm</groupId>
+			<artifactId>easy-ecm-common</artifactId>
+			<version>0.1-SNAPSHOT</version>
 
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>com.springsource.ch.qos.logback.classic</artifactId>
-            <version>${logback.version}</version>
-        </dependency>
-               
+		</dependency>
+		<dependency>
+			<groupId>org.easy.ecm</groupId>
+			<artifactId>easy-ecm-content-service</artifactId>
+			<version>1.9</version>
+
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.web</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.web.servlet</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.oxm</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.el</groupId>
+			<artifactId>com.springsource.org.apache.el</artifactId>
+			<version>6.0.20</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>com.springsource.slf4j.api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+
+		<!-- <dependency> <groupId>ch.qos.logback</groupId> <artifactId>com.springsource.ch.qos.logback.classic</artifactId> 
+			<version>${logback.version}</version> </dependency> -->
+
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
@@ -94,17 +96,117 @@
 			<version>2.2</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.codehaus.jackson</groupId>
-		    <artifactId>jackson-core-asl</artifactId>
-		    <version>1.7.5</version>
-		    <scope>compile</scope>
-		 </dependency>
-		 <dependency>
-		    <groupId>org.codehaus.jackson</groupId>
-		    <artifactId>jackson-mapper-asl</artifactId>
-		    <version>1.7.5</version>
-		    <scope>compile</scope>
-		 </dependency>
-		
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.7.5</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.7.5</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- Use Logback for logging -->
+		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-api</artifactId> 
+			<version>1.6.1</version> </dependency> <dependency> <groupId>org.slf4j</groupId> 
+			<artifactId>jcl-over-slf4j</artifactId> <version>1.6.1</version> </dependency> 
+			<dependency> <groupId>ch.qos.logback</groupId> <artifactId>logback-classic</artifactId> 
+			<version>0.9.28</version> <scope>runtime</scope> </dependency> -->
+
+
+
 	</dependencies>
+
+	<build>
+		<finalName>document-server</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>tomcat-maven-plugin</artifactId>
+				<configuration>
+					<path>/${project.build.finalName}</path>
+					<server>appservertomcat</server>
+					<url>${tomcat.manager}</url>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-war</id>
+						<phase>${war.phase}</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<webResources>
+						<resource>
+							<filtering>true</filtering>
+							<directory>src/main/webapp</directory>
+							<includes>
+								<include>**/*.xml</include>
+								<!-- include any other file types you want to filter -->
+							</includes>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+
+
+		</plugins>
+	</build>
+	<profiles>
+
+		<!-- Used to build a version for local development which uses in memory 
+			database. -->
+		<profile>
+			<id>build-local</id>
+			<activation>
+				<property>
+					<name>build</name>
+					<value>local</value>
+				</property>
+			</activation>
+			<properties>
+				<spring.profile>development</spring.profile>
+				<app.root.url>https://localhost:8443/aa</app.root.url>
+				<repository.properties>dev_repository.properties</repository.properties>
+				<war.phase>install</war.phase>
+			</properties>
+		</profile>
+
+
+		<!-- Used to build a production version to be deployed on -->
+		<profile>
+			<id>build-prod</id>
+			<activation>
+				<property>
+					<name>build</name>
+					<value>prod</value>
+				</property>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<spring.profile>production</spring.profile>
+				<app.root.url>http://daldoc1.versacomllc.com</app.root.url>
+				<repository.properties>prod_repository.properties</repository.properties>
+				<war.phase>install</war.phase>
+			</properties>
+		</profile>
+
+
+	</profiles>
+
 </project>
