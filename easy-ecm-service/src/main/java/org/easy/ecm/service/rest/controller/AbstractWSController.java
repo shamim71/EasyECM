@@ -16,8 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
+
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.exc.UnrecognizedPropertyException;
 import org.easy.ecm.service.exception.ApplicationSecurityException;
 import org.easy.ecm.service.exception.ServiceException;
 import org.easy.ecm.service.rest.bean.GenericResponse;
@@ -28,13 +29,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.easy.ecm.service.Constants;
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 
 
 
@@ -58,7 +60,8 @@ public abstract class AbstractWSController {
 	protected final void writeAsJson(final HttpServletResponse response,
 			final GenericResponse<?> message)
 			throws HttpMessageNotWritableException, IOException {
-		MappingJacksonHttpMessageConverter converter = new MappingJacksonHttpMessageConverter();
+		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+		//MappingJacksonHttpMessageConverter converter = new MappingJacksonHttpMessageConverter();
 		response.setContentType(CONTENT_TYPE_JSON);
 
 		if(message.getHttpStatus() != null){
@@ -89,7 +92,7 @@ public abstract class AbstractWSController {
 	protected void writeObjectAsJsonString(HttpServletResponse response,
 			GenericResponse<?> message) throws HttpMessageNotWritableException,
 			IOException {
-		MappingJacksonHttpMessageConverter converter = new MappingJacksonHttpMessageConverter();
+		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
 		response.setContentType(CONTENT_TYPE_JSON);
 		response.setStatus(message.getHttpStatus().value());
 		HttpOutputMessage outputMessage = new ServletServerHttpResponse(
@@ -111,7 +114,7 @@ public abstract class AbstractWSController {
 	protected void writeObjectAsJsonString(HttpServletResponse response,
 			GenericResponse<?> message, String contentType)
 			throws HttpMessageNotWritableException, IOException {
-		MappingJacksonHttpMessageConverter converter = new MappingJacksonHttpMessageConverter();
+		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
 		response.setContentType("application/" + contentType);
 		response.setStatus(message.getHttpStatus().value());
 		HttpOutputMessage outputMessage = new ServletServerHttpResponse(
@@ -136,7 +139,7 @@ public abstract class AbstractWSController {
 			final HttpServletResponse response, final Object message,
 			final HttpStatus status) throws HttpMessageNotWritableException,
 			IOException {
-		MappingJacksonHttpMessageConverter converter = new MappingJacksonHttpMessageConverter();
+		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
 		response.setContentType(CONTENT_TYPE_JSON);
 		response.setStatus(status.value());
 		HttpOutputMessage outputMessage = new ServletServerHttpResponse(

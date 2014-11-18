@@ -9,14 +9,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
+
 
 public abstract class BaseController {
 
 
 	static final Logger logger = LoggerFactory.getLogger(BaseController.class);
 
-	protected MappingJacksonJsonView  jsonView = new MappingJacksonJsonView();
+	protected MappingJackson2JsonView  jsonView = new MappingJackson2JsonView();
 	
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)

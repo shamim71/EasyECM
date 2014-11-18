@@ -8,6 +8,7 @@
   </parent>
   <artifactId>easy-ecm-common</artifactId>
   <packaging>jar</packaging>
+  <version>1.9-SNAPSHOT</version>
   <name>ECM common classes</name>
 	<dependencies>
 

@@ -2,9 +2,10 @@ package org.easy.ecm.service.rest.bean;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.easy.ecm.service.exception.ServiceException;
 import org.springframework.http.HttpStatus;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 

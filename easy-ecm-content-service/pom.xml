@@ -9,17 +9,9 @@
 	<artifactId>easy-ecm-content-service</artifactId>
 	<packaging>jar</packaging>
 	<name>ECM Repository Service</name>
-	<version>1.9</version>
+	<version>1.9-SNAPSHOT</version>
 	<properties>
-		<wicket.version>1.4.1</wicket.version>
-		<inmethod.grid.version>1.0.0-b4</inmethod.grid.version>
-		<htmllexer.version>2.0-beta1</htmllexer.version>
 		<jackrabbit.version>2.2.8</jackrabbit.version>
-		<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
-		<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
-		<jdbc.driver.version>5.1.13</jdbc.driver.version> 
-
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<dependencies>
@@ -27,7 +19,7 @@
 		<dependency>
 			<groupId>org.easy.ecm</groupId>
 			<artifactId>easy-ecm-common</artifactId>
-			<version>0.1-SNAPSHOT</version>
+			<version>1.9-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
@@ -62,13 +54,6 @@
 			<artifactId>jackrabbit-jcr-rmi</artifactId>
 			<version>${jackrabbit.version}</version>
 		</dependency>
-		<!-- jdbc driver -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.6</version>
-		</dependency>
-		<!-- database end -->
 
 		<!-- Use Logback for logging -->
 		<dependency>

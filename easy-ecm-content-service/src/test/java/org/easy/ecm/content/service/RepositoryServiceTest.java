@@ -19,6 +19,8 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -36,7 +38,9 @@ public class RepositoryServiceTest{
     protected  static Session session = null;
     
     private static final String FOLDER_MY_DOCUMENT = "MyDocument";
-    private static final String TEST_RESOURCE_FILE_PATH = "C:\\Users\\SAhmmed\\projects\\easy-ecm\\easy-ecm-content-service\\src\\test\\resources\\files\\";
+
+    @Autowired 
+    ApplicationContext context;
     
     @BeforeClass
 	public static void setUp() throws Exception {
@@ -49,8 +53,9 @@ public class RepositoryServiceTest{
 	}
 
 	public byte[] readFileAsByte(final String fileName) throws IOException{
-		final String fileNamex = TEST_RESOURCE_FILE_PATH+ fileName;
-		File file = new File(fileNamex);
+		
+		Resource resource =	context.getResource("classpath:files/"+ fileName);
+		File file = resource.getFile();
 		FileInputStream fin = new FileInputStream(file);
 		byte fileContent[] = new byte[(int)file.length()];
 		fin.read(fileContent);
@@ -62,8 +67,8 @@ public class RepositoryServiceTest{
     	EcmDocument doc = new EcmDocument();
     	doc.setFileName(docName);
     	doc.setContent(readFileAsByte(docName));
-		final String fileNamex = TEST_RESOURCE_FILE_PATH+ docName;
-		File file = new File(fileNamex);
+		Resource resource =	context.getResource("classpath:files/"+ docName);
+		File file = resource.getFile();
 		FileInputStream fin = new FileInputStream(file);
 		doc.setInputStream(fin);
     	DocumentMetadata meta = new DocumentMetadata();

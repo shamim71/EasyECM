@@ -11,31 +11,21 @@
 	<name>ECM REST Web Service Interface</name>
 
 	<dependencies>
-		<!-- <dependency> <groupId>org.easy.ecm</groupId> <artifactId>easy-ecm-directory</artifactId> 
-			<version>0.1-SNAPSHOT</version> <scope>compile</scope> </dependency> -->
 		<dependency>
 			<groupId>org.easy.ecm</groupId>
 			<artifactId>easy-ecm-common</artifactId>
-			<version>0.1-SNAPSHOT</version>
-
+			<version>1.9-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.easy.ecm</groupId>
 			<artifactId>easy-ecm-content-service</artifactId>
-			<version>1.9</version>
-
+			<version>1.9-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>org.springframework.web</artifactId>
+			<artifactId>spring-web</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>org.springframework.web.servlet</artifactId>
-			<version>${org.springframework.version}</version>
-		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -44,7 +34,7 @@
 
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>org.springframework.oxm</artifactId>
+			<artifactId>spring-oxm</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
 		<dependency>
@@ -96,17 +86,16 @@
 			<version>2.2</version>
 		</dependency>
 		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-core-asl</artifactId>
-			<version>1.7.5</version>
-			<scope>compile</scope>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.0.4</version>
 		</dependency>
 		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.7.5</version>
-			<scope>compile</scope>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.0.4</version>
 		</dependency>
+
 
 		<!-- Use Logback for logging -->
 		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-api</artifactId> 
