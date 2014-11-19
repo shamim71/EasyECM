@@ -13,6 +13,16 @@ public class DirectoryUser {
 	
 	private String fullName;
 	
+	private String Dn;
+	
+	public String getDn() {
+		return Dn;
+	}
+
+	public void setDn(String dn) {
+		Dn = dn;
+	}
+
 	public String getFullName() {
 		return fullName;
 	}
