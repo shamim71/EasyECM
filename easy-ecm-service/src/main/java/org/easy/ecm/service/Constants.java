@@ -1,4 +1,4 @@
-package com.easy.ecm.service;
+package org.easy.ecm.service;
 
 public class Constants {
 

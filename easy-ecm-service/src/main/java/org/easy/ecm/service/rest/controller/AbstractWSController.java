@@ -1,8 +1,8 @@
 package org.easy.ecm.service.rest.controller;
 
 
-import static com.easy.ecm.service.Constants.ERROR_CODE_INVALID_MESSAGE_STRUCTURE;
-import static com.easy.ecm.service.Constants.ERROR_CODE_NULL_POINTER_ENCOUNTERED;
+import static org.easy.ecm.service.Constants.ERROR_CODE_INVALID_MESSAGE_STRUCTURE;
+import static org.easy.ecm.service.Constants.ERROR_CODE_NULL_POINTER_ENCOUNTERED;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
@@ -12,13 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-
-
-
-
-
-
-import org.apache.log4j.Logger;
 import org.easy.ecm.service.exception.ApplicationSecurityException;
 import org.easy.ecm.service.exception.ServiceException;
 import org.easy.ecm.service.rest.bean.GenericResponse;
@@ -34,8 +27,9 @@ import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import com.easy.ecm.service.Constants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.easy.ecm.service.Constants;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 
 
@@ -50,7 +44,8 @@ import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
  */
 public abstract class AbstractWSController {
 
-	protected final Logger logger = Logger.getLogger(getClass());
+	Logger logger = LoggerFactory.getLogger(getClass().getCanonicalName());
+	
 	private static final String CONTENT_TYPE_JSON = "application/json";
 	private static final String CONTENT_TYPE_XML = "application/xml";
 

@@ -1,9 +1,0 @@
-{
-
-	"items":[
-		{"password":123,"emailAddress":"admin@gmail.com","displayName":"Shamim","id":1,"admin":false,"distinguishName":"admin"},
-
-		{"password":123,"emailAddress":"admin@gmail.com","displayName":"Administrator","id":31,"admin":false,"distinguishName":"testuser1"}		
-	
-		]
-}

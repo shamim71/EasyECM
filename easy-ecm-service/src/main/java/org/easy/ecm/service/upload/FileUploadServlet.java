@@ -1,6 +1,6 @@
-package com.easy.ecm.service.upload;
+package org.easy.ecm.service.upload;
 
-import static com.easy.ecm.service.Constants.PATH_SEPARATOR;
+import static org.easy.ecm.service.Constants.PATH_SEPARATOR;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
 
 
 
-import com.easy.ecm.service.Constants;
+import org.easy.ecm.service.Constants;
 
 @SuppressWarnings("serial")
 @WebServlet(name = "FileUploadServlet", urlPatterns = { "/FileUploadServlet" })
@@ -50,10 +50,8 @@ public class FileUploadServlet extends HttpServlet {
 	/** Logger handler */
 
 	
-	private static final Logger LOG = LoggerFactory
-			.getLogger(FileUploadServlet.class);
+	Logger logger = LoggerFactory.getLogger(getClass().getCanonicalName());
 	
-
 	private String getUrlEncodedValue(String value) {
 		String p = null;
 		try {
@@ -100,9 +98,9 @@ public class FileUploadServlet extends HttpServlet {
 			
 
 			filename = Text.escapeIllegalJcrChars(filename);
-			System.out.println(filename);
-			LOG.debug("File Name: "+filename);
-			LOG.info(".........................................");
+
+			logger.info("File Name: "+filename);
+			logger.info(".........................................");
 
 			if (!StringUtils.isEmpty(filename)) {
 				InputStream filecontent = part.getInputStream();

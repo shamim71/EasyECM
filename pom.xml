@@ -36,9 +36,8 @@
 		<spring.ldap.version>2.0.2.RELEASE</spring.ldap.version>
 		<junit.version>4.11</junit.version>
 		<aspectj.version>1.6.5</aspectj.version>
-		<slf4j.version>1.6.1</slf4j.version>
-        <logback.version>0.9.15</logback.version>
-        
+		<slf4j.version>1.7.5</slf4j.version>
+        <logback.version>1.0.13</logback.version>
 	</properties>
 	
   <modules>
@@ -122,11 +121,6 @@
 			<version>${org.springframework.version}</version>
 		</dependency>
 		
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.9</version>
-		</dependency>
 
 		<!-- Test dependencies -->
 		<dependency>

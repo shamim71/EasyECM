@@ -1,4 +1,4 @@
-package com.easy.ecm.service.filter;
+package org.easy.ecm.service.filter;
 
 import java.io.IOException;
 

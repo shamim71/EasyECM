@@ -41,7 +41,7 @@
 		</description>
 		<display-name>SimpleCORSFilter</display-name>
 		<filter-name>SimpleCORSFilter</filter-name>
-		<filter-class>com.easy.ecm.service.filter.SimpleCORSFilter</filter-class>
+		<filter-class>org.easy.ecm.service.filter.SimpleCORSFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>SimpleCORSFilter</filter-name>
@@ -49,7 +49,7 @@
 	</filter-mapping>
 
 	<listener>
-		<listener-class>com.easy.ecm.service.listener.JcrSessionContextListener</listener-class>
+		<listener-class>org.easy.ecm.service.listener.JcrSessionContextListener</listener-class>
 	</listener>
 
 

@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.easy.ecm.service.Constants;
+import org.easy.ecm.service.Constants;
 
 /**
  * This class is responsible for providing user information such as list of
@@ -99,8 +99,10 @@ public class DocumentServiceController extends BaseController {
 			document = documentService.retrieveDocumentAsStream(path);
 			/** Prepare response */
 			response.setContentType(document.getMetadata().getMimeType());
-			response.setHeader("Content-Disposition", "filename="
-					+ document.getMetadata().getFileName());
+			
+			response.setHeader("Content-Disposition", "filename=\""
+					+ document.getMetadata().getFileName() +"\"");
+			
 			/** Send content to Browser */
 
 			InputStream inputStream = null;
@@ -134,7 +136,7 @@ public class DocumentServiceController extends BaseController {
 		
 		
 		final String referrer = request.getHeader("referer"); 
-		System.out.println("Referrer: "+ referrer + ", File: "+p );
+		logger.debug("Referrer: "+ referrer + ", File: "+p );
 		EcmDocument document;
 		
 		
@@ -146,8 +148,8 @@ public class DocumentServiceController extends BaseController {
 
 			/** Prepare response */
 			response.setContentType(document.getMetadata().getMimeType());
-			response.setHeader("Content-Disposition", "filename="
-					+ document.getMetadata().getFileName());
+			response.setHeader("Content-Disposition", "filename=\""
+					+ document.getMetadata().getFileName() +"\"");
 			/**Set content size */
 			response.setContentLength((int )document.getMetadata().getSize());
 			/** Send content to Browser */
